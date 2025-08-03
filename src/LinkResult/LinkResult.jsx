@@ -47,6 +47,15 @@ const LinkResult = ({ input }) => {
     return () => clearTimeout(timer);
   }, [copied]);
 
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(shorten);
+      setCopied(true);
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
+
   return (
     <>
       {loading && <p className="loader">Loading...</p>}
@@ -54,11 +63,10 @@ const LinkResult = ({ input }) => {
       {shorten && (
         <div className="result">
           <p>{shorten}</p>
-          <CopyToClipboard text={shorten} onCopy={() => setCopied(!copied)}>
-            <button className={copied ? "copied" : ""}>
-              Copy to clipboard
-            </button>
-          </CopyToClipboard>
+
+          <button onClick={handleCopy} className={copied ? "copied" : ""}>
+            {copied ? "Copied!" : "Copy to clipboard"}
+          </button>
         </div>
       )}
     </>
