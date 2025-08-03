@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import CopyToClipboard from "react-copy-to-clipboard";
 
 const LinkResult = ({ input }) => {
   const BITLY_TOKEN = import.meta.env.VITE_BITLY_TOKEN;
